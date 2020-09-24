@@ -4,15 +4,11 @@
 <style>
 	table,
 	th,
-	td {
-		border: 2px solid black;
-		padding: 1px;
+	td
+	{
+		border: 1px solid black;
 	}
-
-	#t01 {
-		width: 100%;
-		border: 1px solid gray;
-	}
+	
 </style>
 
 <head>
@@ -60,7 +56,7 @@
 			<hr class="my-4">
 			<p>And here is the stars.</p>
 		</div>
-		<table>
+		<table id="#t01">
 			<tr>
 				<th rowspan="2">Game Date</th>
 				<th rowspan="2">Opposing Team Name</th>
@@ -100,16 +96,21 @@
 	</div>
 	<div>
 
-	</div><table id="t01">
-		<tr>
-			<th>winner</th>
-			<th>Losses</th>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>0</td>
-		</tr>
-		</table>
+	</div>
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>winner</th>
+				<th>Losses</th>
+			</tr>
+		</thead>
+		<thead>
+			<tr>
+				<td>3</td>
+				<td>0</td>
+			</tr>
+		</thead>
+	</table>
 	</div>
 
 
