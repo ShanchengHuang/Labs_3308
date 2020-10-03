@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Interest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        footer {
+            text-align: center;
+            padding: 3px;
+            background-color: #35393d;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav col-11">
+            <li class="nav-item active">
+                <a class="nav-link" href="../HW1/mypage_bootstrap.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../HW1/projects.html">Project</a>
+            </li>
+
+        </ul>
+        <a class="navbar-brand pull-right col" href="https://github.com/ShanchengHuang">
+            <img src="../HW1/Icon/Github.png" alt="Logo" style="width:40px;">
+        </a>
+    </nav>
+
+    <div class="container">
+        <h3>Add New Interest</h3>
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Interest Name</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Text about Interest </label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+
+                    <label for="exampleFormControlFile1">Upload Local Image:</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                <div class="form-group col">
+                    <label for="exampleFormControlSelect1">Seclect # Tweets to Display</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <p>On a scale of 1-5, how Interested in this are you?</p>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+                    checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    1
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                    2
+                </label>
+            </div>
+            <div class="form-check disabled form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3"
+                    disabled>
+                <label class="form-check-label" for="exampleRadios3">
+                    3
+                </label>
+            </div>
+            <div class="form-check disabled form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option4"
+                    disabled>
+                <label class="form-check-label" for="exampleRadios4">
+                    4
+                </label>
+            </div>
+            <div class="form-check disabled form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option5"
+                    disabled>
+                <label class="form-check-label" for="exampleRadios5">
+                    5
+                </label>
+            </div>
+            <br><br>
+            <div class="row">
+
+                <div class="form-group col">
+                    <label for="exampleInputEmail1">Login to Finsih Submitting</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group col">
+                    <label for="exampleInputPassword1">
+                        <p></p>
+                    </label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+
+
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Ready to Submit</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+
+
+    <footer>
+        <a href="https://www.linkedin.com/"><img class="icon" src="../HW1/Icon/Linkin.png" style="width:30px"></a>
+        <!--Photo come from https://media-exp1.licdn.com/dms/image/C510BAQGIYSLlKxpseA/company-logo_200_200/0?e=2159024400&v=beta&t=gvkjlvwfdIl1AyVnFoyc6-NanlTcEVNqMULZLtnAHMQ-->
+    </footer>
+</body>
+
+</html>
