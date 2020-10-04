@@ -91,19 +91,25 @@ function changeColor(stats) {
 
 */
 
-function loadPlayersPage(){
+function loadStatsPage() {
 	var table = document.getElementById("stats_table");//Retrieve our table element
-	var row_counter;//Keeps track of our row index
-	var col_counter;//Keeps track of our column index
-	var cell_value;
-	for(row_counter = 2; row_counter < table.rows.length; row_counter++)
-	{//Outer for loop iterates over each row
-		if (table.rows[row_counter].cell[3].innerHTML > table.rows[row_counter].cell[4].innerHTML){
-			table.rows[row_counter].cell[5].innerHTML = "Home";
-		}else{
-			table.rows[row_counter].cell[5].innerHTML = "Opp";
+	var counter;//Keeps track of our row index
+	//var col_counter;//Keeps track of our column index
+	var win_num = 0;
+	var lose_num = 0;
+	for (counter = 2; counter < table.rows.length; counter++) {//Outer for loop iterates over each row
+		if (parseInt(table.rows[counter].cells[2].innerHTML) > parseInt(table.rows[counter].cells[3].innerHTML)) {
+			table.rows[counter].cells[4].innerHTML = "CUBouler";
+			win_num++;
+		} else {
+			table.rows[counter].cells[4].innerHTML = table.rows[counter].cells[1].textContent;
+			lose_num++;
 		}
 	}
+
+	document.getElementById("wins").innerHTML = win_num;
+	document.getElementById("losses").innerHTML = lose_num;
+
 }
 
 /*
@@ -148,5 +154,38 @@ function loadPlayersPage(){
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
+function loadPlayersPage() {
 
+	document.getElementById('P1').innerHTML = players[0].name;
+	document.getElementById('P2').innerHTML = players[1].name;
+	document.getElementById('P3').innerHTML = players[2].name;
+	document.getElementById('P4').innerHTML = players[3].name;
+
+
+
+}
+
+function switchPlayers(playerNum) {
+	document.getElementById('player_img').src = players[playerNum].img;
+	document.getElementById('player_img').alt = players[playerNum].alt;
+	document.getElementById("p_year").innerHTML = players[playerNum].year;
+	document.getElementById('p_major').innerHTML = players[playerNum].major;
+	document.getElementById('g_played').innerHTML = players[playerNum].games_played;
+	document.getElementById('p_yards').innerHTML = players[playerNum].pass_yards;
+	document.getElementById('r_yards').innerHTML = players[playerNum].rushing_yards;
+	document.getElementById('rec_yards').innerHTML = players[playerNum].receiving_yards;
+
+	var avg_p_yards = players[playerNum].pass_yards / players[playerNum].games_played;
+	avg_p_yards = avg_p_yards.toFixed(2);
+	var avg_r_yards = players[playerNum].rushing_yards / players[playerNum].games_played;
+	avg_r_yards = avg_r_yards.toFixed(2);
+	var avg_rec_yards = players[playerNum].receiving_yards / players[playerNum].games_played;
+	avg_rec_yards = avg_rec_yards.toFixed(2);
+
+
+	document.getElementById('avg_p_yards').innerHTML = avg_p_yards;
+	document.getElementById('avg_r_yards').innerHTML = avg_r_yards;
+	document.getElementById('avg_rec_yards').innerHTML = avg_rec_yards;
+
+}
 
