@@ -120,8 +120,8 @@ app.get('/home', function (req, res) {
 });
 app.get('/home/pick_color', function (req, res) {
 	var color_choice = req.query.color_selection; // Investigate why the parameter is named "color_selection"
-	var color_options =  // Write a SQL query to retrieve the colors from the database
-	var color_message = // Write a SQL query to retrieve the color message for the selected color
+	var color_options = req.body.color_name; // Write a SQL query to retrieve the colors from the database
+	var color_message = req.body.color_message;// Write a SQL query to retrieve the color message for the selected color
 		db.task('get-everything', task => {
 			return task.batch([
 				task.any(color_options),
