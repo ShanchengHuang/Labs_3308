@@ -120,7 +120,7 @@ app.get('/home', function (req, res) {
 });
 app.get('/home/pick_color', function (req, res) {
 	var color_choice = req.query.color_selection; // Investigate why the parameter is named "color_selection"
-	var color_options = req.body.color_name; // Write a SQL query to retrieve the colors from the database
+	var color_options = req.body.color_options; // Write a SQL query to retrieve the colors from the database
 	var color_message = req.body.color_message;// Write a SQL query to retrieve the color message for the selected color
 		db.task('get-everything', task => {
 			return task.batch([
@@ -147,5 +147,38 @@ app.get('/home/pick_color', function (req, res) {
 			});
 
 });
+
+app.post('/home/pick_color', function(req, res) {
+	var color_hex = req.body.color_hex;
+	var color_name = req.body.color_name;
+	var color_message = req.body.color_message;
+	var insert_statement = req.body.insert_statement;// Write a SQL statement to insert a color into the favorite_colors table
+	var color_select = req.body.color_select;// Write a SQL statement to retrieve all of the colors in the favorite_colors table
+
+	db.task('get-everything', task => {
+        return task.batch([
+            task.any(insert_statement),
+            task.any(color_select)
+        ]);
+    })
+    .then(info => {
+    	res.render('pages/home',{
+				my_title: "Home Page",
+				data: // Return the color choices
+				color: // Return the hex value of the color added to the table
+				color_msg: // Return the color message of the color added to the table
+			})
+    })
+    .catch(err => {
+            console.log('error', err);
+            response.render('pages/home', {
+                title: 'Home Page',
+                data: '',
+                color: '',
+                color_msg: ''
+            })
+    });
+});
+
 app.listen(3000);
 console.log('3000 is the magic port');
