@@ -1,0 +1,351 @@
+Homework #3
+Your name:
+
+
+---------------------------------------- Question 1 Query ---------------------------------------- 
+
+
+SELECT COUNT(title) FROM film inner JOIN  (SELECT inventory.inventory_id, inventory.film_id FROM inventory inner JOIN (SELECT rental.customer_id, rental.inventory_id FROM rental inner JOIN  (SELECT customer_id, amount FROM payment where amount = 4.99) AS pay ON rental.customer_id = pay.customer_id) as ren ON ren.inventory_id = inventory.inventory_id) AS inv ON inv.film_id = film.film_id;\
+										put query here
+
+---------------------------------------- Question 1 Results ---------------------------------------- 					
+
+ count  
+--------
+ 105025
+(1 row)
+
+
+---------------------------------------- Question 2 Query ---------------------------------------- 
+
+SELECT last_name,first_name FROM customer WHERE active = 0 ORDER BY last_name;
+										put query here
+
+---------------------------------------- Question 2 Results ---------------------------------------- 					
+
+ last_name | first_name 
+-----------+------------
+ ARCE      | HARRY
+ COX       | JUDITH
+ CRAWLEY   | MAURICE
+ CULP      | THEODORE
+ EASTER    | BEN
+ EGGLESTON | JIMMIE
+ GOODEN    | KENNETH
+ JUNG      | CHRISTIAN
+ LARSON    | HEIDI
+ MARTIN    | SANDRA
+ MATTHEWS  | ERICA
+ NEAL      | PENNY
+ ROUSH     | TERRANCE
+ RUNYON    | NATHAN
+ WELLS     | SHEILA
+(15 rows)
+										put result here	(output of the table)	
+
+---------------------------------------- Question 3 Query ---------------------------------------- 
+
+ELECT payment_id,amount,payment_date FROM payment ORDER BY amount DESC LIMIT 10;
+										put query here
+
+---------------------------------------- Question 3 Results ---------------------------------------- 					
+
+ payment_id | amount |         payment_date          
+------------+--------+-------------------------------
+      24866 |  11.99 | 2017-03-02 20:46:39.996577-07
+      28814 |  11.99 | 2017-04-06 21:26:57.996577-06
+      23757 |  11.99 | 2017-03-21 22:02:26.996577-06
+      24553 |  11.99 | 2017-03-23 20:47:59.996577-06
+      17354 |  11.99 | 2017-02-17 22:19:47.996577-07
+      28799 |  11.99 | 2017-04-07 19:14:17.996577-06
+      20403 |  11.99 | 2017-03-21 21:57:24.996577-06
+      22650 |  11.99 | 2017-03-22 22:17:22.996577-06
+      17055 |  11.99 | 2017-01-25 16:46:45.996577-07
+      29136 |  11.99 | 2017-04-29 21:06:07.996577-06
+(10 rows)
+										put result here	(output of the table)	
+
+---------------------------------------- Question 4 Query ---------------------------------------- 
+
+SELECT COUNT(*) FROM film WHERE language_id =  (SELECT language_id FROM language WHERE name = 'English');
+SELECT COUNT(*) FROM film LEFT JOIN language ON film.language_id = language.language_id WHERE language.name = 'English';										put query here
+
+---------------------------------------- Question 4 Results ---------------------------------------- 					
+
+ count 
+-------
+  1000
+(1 row)
+
+ count 
+-------
+  1000
+(1 row)
+										put result here	(output of the table)	
+
+---------------------------------------- Question 5 Query ---------------------------------------- 
+
+SELECT title from film inner JOIN (SELECT film_id FROM (SELECT film_id,count(inventory_id) as number_of_inventory FROM inventory AS a group by film_id  ORDER BY number_of_inventory DESC) as a WHERE a.number_of_inventory = 8 ORDER BY film_id) AS list on list.film_id = film.film_id;
+
+---------------------------------------- Question 5 Results ---------------------------------------- 					
+
+         title          
+------------------------
+ ACADEMY DINOSAUR
+ APACHE DIVINE
+ BEVERLY OUTLAW
+ BINGO TALENTED
+ BOOGIE AMELIE
+ BOUND CHEAPER
+ BUCKET BROTHERHOOD
+ BUTTERFLY CHOCOLAT
+ CAT CONEHEADS
+ CONFIDENTIAL INTERVIEW
+ CROSSROADS CASUALTIES
+ CUPBOARD SINNERS
+ CURTAIN VIDEOTAPE
+ DANCING FEVER
+ DEER VIRGINIAN
+ DINOSAUR SECRETARY
+ DOGMA FAMILY
+ DYNAMITE TARZAN
+ EXPENDABLE STALLION
+ FAMILY SWEET
+ FORWARD TEMPLE
+ FROST HEAD
+ GARDEN ISLAND
+ GIANT TROOPERS
+ GILMORE BOILED
+ GLEAMING JAWBREAKER
+ GOODFELLAS SALUTE
+ GREATEST NORTH
+ GRIT CLOCKWORK
+ HARRY IDAHO
+ HEAVYWEIGHTS BEAST
+ HOBBIT ALIEN
+ HORROR REIGN
+ HUSTLER PARTY
+ INNOCENT USUAL
+ INVASION CYCLONE
+ JUGGLER HARDLY
+ KISS GLORY
+ LOATHING LEGALLY
+ LOSE INCH
+ MARRIED GO
+ METROPOLIS COMA
+ MOCKINGBIRD HOLLYWOOD
+ MOON BUNCH
+ MUSCLE BRIGHT
+ NETWORK PEAK
+ OPERATION OPERATION
+ PITY BOUND
+ PRIMARY GLASS
+ PULP BEVERLY
+ RIDGEMONT SUBMARINE
+ ROCKETEER MOTHER
+ ROSES TREASURE
+ RUGRATS SHAKESPEARE
+ RUSH GOODFELLAS
+ SATURDAY LAMBS
+:
+										put result here	(output of the table)	
+
+---------------------------------------- Question 6 Query ---------------------------------------- 
+
+ SELECT customer_id, Sum(amount) as total_amount FROM payment WHERE customer_id>500 Group By customer_id;										put query here
+
+---------------------------------------- Question 6 Results ---------------------------------------- 					
+
+customer_id | total_amount 
+-------------+--------------
+         550 |       159.68
+         539 |        90.78
+         554 |       101.78
+         576 |       139.66
+         509 |       100.80
+         556 |        83.79
+         529 |       118.71
+         502 |       138.66
+         587 |       108.74
+         578 |        96.78
+         506 |       152.65
+         508 |       127.75
+         599 |        83.81
+         596 |        96.72
+         512 |       115.74
+         523 |        93.78
+         538 |       117.71
+         595 |       117.70
+         534 |        88.76
+         597 |        99.75
+         548 |        79.81
+         501 |        89.79
+         545 |        89.79
+         528 |       111.75
+         563 |       110.71
+         557 |        73.76
+         559 |       110.72
+         513 |       148.69
+         589 |       129.72
+         555 |        74.83
+         522 |       167.67
+         567 |        85.80
+         575 |       126.71
+         507 |        95.75
+         543 |        82.78
+         565 |       126.71
+         566 |       141.66
+         551 |        96.74
+         532 |       152.68
+         592 |       111.71
+         553 |       107.76
+         519 |       103.77
+         521 |        80.77
+         558 |       135.72
+         540 |       112.76
+         598 |        83.78
+         526 |       221.55
+         524 |        87.81
+         588 |       115.71
+         586 |        64.81
+         572 |       108.75
+         593 |       113.74
+         549 |        77.80
+         552 |        90.79
+         541 |       108.76
+         577 |       118.72
+         505 |        97.79
+         561 |        96.73
+         525 |        74.81
+         531 |       118.75
+         546 |       107.74
+         562 |       109.75
+         537 |       103.75
+         581 |       107.73
+         591 |       134.73
+         503 |       115.68
+         573 |       120.71
+         517 |       105.75
+         585 |       117.76
+         511 |        99.76
+         514 |        74.78
+         582 |       113.75
+         504 |       133.72
+         560 |       132.70
+         547 |        99.77
+         518 |       111.74
+         583 |       117.77
+         569 |       134.68
+         527 |        81.76
+         590 |       112.75
+         564 |        91.76
+         535 |       135.68
+         579 |       111.73
+         510 |       122.74
+         584 |       129.70
+         515 |       126.72
+         574 |       109.72
+         571 |       121.76
+         516 |        98.74
+         542 |        94.82
+         594 |       130.73
+         533 |       141.67
+         568 |        66.79
+         544 |        98.78
+         570 |        99.74
+         580 |        99.73
+         530 |        76.77
+         536 |       117.75
+         520 |       134.68
+(99 rows)
+										put result here	(output of the table)	
+
+---------------------------------------- Question 7 Query ---------------------------------------- 
+
+SELECT Sum(amount) as total_sales FROM payment inner JOIN rental on rental.rental_id = payment.rental_id inner JOIN inventory on inventory.inventory_id=rental.inventory_id inner join film on film.film_id = inventory.film_id inner join film_category on film_category.film_id = film.film_id Group by film_category.category_id;
+ total_sales 
+										put query here
+
+---------------------------------------- Question 7 Results ---------------------------------------- 					
+
+total_sales 
+-------------
+     3639.59
+     4756.98
+     3655.55
+     4270.67
+     4361.57
+     4281.33
+     4587.39
+     4375.85
+     4383.58
+     4656.30
+     3549.64
+     5314.21
+     4217.52
+     3417.72
+     4226.07
+     3722.54
+(16 rows)
+
+										put result here	(output of the table)	
+
+---------------------------------------- Question 8 Query ---------------------------------------- 
+
+SELECT COUNT(rental_id) AS number_of_rentals FROM rental r inner JOIN customer c ON c.customer_id=r.customer_id WHERE first_name='JOHN' AND last_name='FARNSWORTH';
+
+										put query here
+
+---------------------------------------- Question 8 Results ---------------------------------------- 					
+
+ number_of_rentals 
+-------------------
+                31
+(1 row)
+
+										put result here	(output of the table)	
+
+---------------------------------------- Question 9 Query ---------------------------------------- 
+
+postgres=# SELECT COUNT(*) FROM Payment WHERE payment_date < '20170127';
+
+
+										put query here
+
+---------------------------------------- Question 9 Results ---------------------------------------- 					
+
+ count 
+-------
+   328
+(1 row)
+
+
+										put result here	(output of the table)	
+
+---------------------------------------- Question 10 Query ---------------------------------------- 
+
+CREATE TABLE short_films(film_id integer not null primary key, title varchar(40) not null, length integer not null, replacement_cost decimal(9,2)not null, rating varchar(5) not null);
+									put query here
+	
+---------------------------------------- Question 11 Query ---------------------------------------- 
+
+INSERT INTO short_films SELECT film_id,title,length,replacement_cost,rating  FROM film WHERE length < 50 ;										put query here
+
+---------------------------------------- Question 12 Query ---------------------------------------- 
+
+Delete FROM short_films WHERE replacement_cost>19.99;										put query here
+
+---------------------------------------- Question 13 Query ---------------------------------------- 
+
+ALTER TABLE short_films ADD stars integer default 5;										put query here
+
+---------------------------------------- Question 14 Query ---------------------------------------- 
+
+ALTER TABLE short_films RENAME COLUMN length TO length_min; ALTER TABLE short_films ADD length_sec integer ; UPDATE short_films  SET length_sec  = (length_min*60);
+										put query here
+
+---------------------------------------- Question 15 Query ---------------------------------------- 
+
+DROP TABLE short_films ;									put query here
+
+
