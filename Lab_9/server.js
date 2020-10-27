@@ -97,7 +97,7 @@ app.get('/register', function (req, res) {
 
 /*Add your other get/post request handlers below here: */
 app.get('/home', function (req, res) {
-	var query = 'select * from favorite_colors;';
+	var query = "select * from favorite_colors;";
 	db.any(query)
 		.then(function (rows) {
 			res.render('pages/home', {
@@ -120,8 +120,8 @@ app.get('/home', function (req, res) {
 });
 app.get('/home/pick_color', function (req, res) {
 	var color_choice = req.query.color_selection; // Investigate why the parameter is named "color_selection"
-	var color_options = req.body.color_options; // Write a SQL query to retrieve the colors from the database
-	var color_message = req.body.color_message;// Write a SQL query to retrieve the color message for the selected color
+	var color_options = "select * from favorite_colors;"; // Write a SQL query to retrieve the colors from the database
+	var color_message = "select color_msg from favorite_colors WHERE hex_value = '"+ color_choice +"';";// Write a SQL query to retrieve the color message for the selected color
 	db.task('get-everything', task => {
 		return task.batch([
 			task.any(color_options),
@@ -152,8 +152,8 @@ app.post('/home/pick_color', function (req, res) {
 	var color_hex = req.body.color_hex;
 	var color_name = req.body.color_name;
 	var color_message = req.body.color_message;
-	var insert_statement = req.body.insert_statement;// Write a SQL statement to insert a color into the favorite_colors table
-	var color_select = req.body.color_select;// Write a SQL statement to retrieve all of the colors in the favorite_colors table
+	var insert_statement = "INSERT into favorite_colors (hex_value, name, color_msg) VALUES ('"+color_hex+"', '"+color_name+"', '"+color_msg+"');";// Write a SQL statement to insert a color into the favorite_colors table
+	var color_select = "select * from favorite_cSSSolors;";// Write a SQL statement to retrieve all of the colors in the favorite_colors table
 
 	db.task('get-everything', task => {
 		return task.batch([
@@ -179,6 +179,38 @@ app.post('/home/pick_color', function (req, res) {
 			})
 		});
 });
+
+app.get('/home/team_stats', function (req, res) {
+var games = 'select * from football_games;';
+var query2 = 'select * from table_name_2;';
+var query3 = 'select * from table_name_3;';
+db.task('get-everything', task => {
+    return task.batch([
+        task.any(query1),
+        task.any(query2),
+        task.any(query3)
+    ]);
+})
+.then(data => {
+	res.render('/home/tem_stats',{
+			my_title: "Page Title Here",
+			result_1: data[0],
+			result_2: data[1],
+			result_3: data[2]
+		})
+})
+.catch(err => {
+    // display error message in case an error
+        console.log('error', err);
+        res.render('/home/tem_stats',{
+			my_title: "Page Title Here",
+			result_1: '',
+			result_2: '',
+			result_3: ''
+		})
+});
+
+}
 
 app.listen(3000);
 console.log('3000 is the magic port');
