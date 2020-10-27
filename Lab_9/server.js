@@ -180,8 +180,8 @@ app.post('/home/pick_color', function (req, res) {
 		});
 });
 
-app.get('/home/tem_stats', function (req, res) {
-var query1 = 'select * from table_name;';
+app.get('/home/team_stats', function (req, res) {
+var games = 'select * from football_games;';
 var query2 = 'select * from table_name_2;';
 var query3 = 'select * from table_name_3;';
 db.task('get-everything', task => {
