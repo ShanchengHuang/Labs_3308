@@ -57,18 +57,17 @@
 
 				<form action="/home/pick_color" method="get">
 					<!-- TODO: Second EJS Update -->
-					<%
-if (data) {
+					<%if (data) {
     var buttons = '';
 	data.forEach(function(item){
   		 buttons += '<button type="submit" name="color_selection" class="btn btn-block" style="background-color:#' + item.hex_value + '" value="' + item.hex_value + '">';
 			 if(item.name){
 		       buttons += item.name + '</button>';
-		     }
+		     	}
 		     else{
 		    	 buttons += item.hex_value + '</button>';
-		     }
-  	 }); %>
+		     	}
+  	 				}); %>
 					<%- buttons %>
 					<% } %>
 				</form>
