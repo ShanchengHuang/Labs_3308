@@ -26,24 +26,19 @@
 						that ran onload for Lab 5.  We are doing the same kind of operations we had in Lab 5, but we are instead having
 						everything handled via server-side scriptes
 			-->
-			<%
-			if (games) {
-				var table = '';
-				var win = 0;
-				var lost = 0;
-				data.forEach(function(item){
-					   table += '<tr><td>'+ item.date +'</td><td>'+ item.name +'</td><td>'+ item.home_score +'</td><td>'+ item.visitor_score +'</td>';
-						 if(item.home_score > item.visitor_score){
-							table += '<td> CU BOULDR </td> </tr>'; //Boulder win
-						 }
-						 else{
-							table += '<td> '+ item.name +' </td> </tr>';					
-						 }
-				   }); %>
-				  
-				   <%- table %>
-			<% } %>		
-
+			<% for (var i = 0; i < 12; i ++) {%>
+				<tr>
+					<td><%- date[i].date %></td>
+					<td><%- name[i].name %></td>
+					<td><%- visitor_score[i].visitor_score %></td>
+					<td><%- home_score[i].home_score %></td>
+					<% if (visitor_score[i].visitor_score < home_score[i].home_score){%>
+						<td>CU BOULDER</td>
+					<%}else{%>
+						<td><%- name[i].name%></td>
+					<%}%>
+				</tr>		
+			<%}%>
 	</table>
 	<br>
 	<table class="table text-center">

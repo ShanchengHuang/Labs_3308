@@ -200,18 +200,16 @@ app.get('/home/team_stats', function (req, res) {
 		]);
 	})
 		
-	db.any(games)
-		.then(function (rows) {
-			res.render('pages/team_stats', {
+	.then(data => {
+		res.render('pages/team_stats',{
 				my_title: "Team Stats",
-				name: rows,
-				home_score: '',
-				visitor_score: '',
-				date: '',
-				player: ''
+				result_1: data[0],
+				result_2: data[1],
+				result_3: data[2],
+				result_4: data[2],
+				result_5: data[2]
 			})
-
-		})
+	})
 		.catch(function (err) {
 			// display error message in case an error
 			console.log('error', err);
@@ -225,7 +223,31 @@ app.get('/home/team_stats', function (req, res) {
 			})
 		})
 
-}
+});
+
+app.get('/home/player_info', function (req, res) {
+	var player = 'SELECT * FROM football_players;';
+	
+	db.any(player)
+		.then(function (rows) {
+			res.render('pages/player_info',{
+				my_title: "Player Info",
+				data: rows,
+				id:'',
+				name:''
+			})
+	
+		})
+		.catch(function (err) {
+			// display error message in case an error
+			console.log('error', err);
+			res.render('pages/player_info',{
+				my_title: "Player Info",
+				data: ''
+			})
+		})
+});
+
 
 app.listen(3000);
 console.log('3000 is the magic port');
