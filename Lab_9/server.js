@@ -180,12 +180,12 @@ app.post('/home/pick_color', function (req, res) {
 		});
 });
 
-app.get('/home/team_stats', function (req, res) {
+app.get('/team_stats', function (req, res) {
 	var games = 'SELECT * FROM football_games;';
-	var name = 'SELECT visitor_name FROM football_games WHERE';
+	var name = 'SELECT visitor_name as name FROM football_games';
 	var home_score = 'SELECT home_score FROM football_games;';
-	var visitor_score = 'SELECT visitor_score FROM ;';
-	var date = 'SELECT game_date FROM football_games;';
+	var visitor_score = 'SELECT visitor_score FROM football_games;';
+	var date = 'SELECT game_date as date FROM football_games;';
 	var lost = 'SELECT COUNT(*) FROM football_games WHERE home_score < visitor_score;';
 	var win = 'SELECT COUNT(*) FROM football_games WHERE home_score > visitor_score;';
 	
@@ -252,3 +252,4 @@ app.get('/home/player_info', function (req, res) {
 
 app.listen(3000);
 console.log('3000 is the magic port');
+
