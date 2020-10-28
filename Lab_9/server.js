@@ -203,11 +203,12 @@ app.get('/home/team_stats', function (req, res) {
 	.then(data => {
 		res.render('pages/team_stats',{
 				my_title: "Team Stats",
-				result_1: data[0],
-				result_2: data[1],
-				result_3: data[2],
-				result_4: data[2],
-				result_5: data[2]
+				name: data[0],
+				home_score: data[1],
+				visitor_score: data[2],
+				date: data[3], 
+				lost: data[4],
+				win: data[5]
 			})
 	})
 		.catch(function (err) {
