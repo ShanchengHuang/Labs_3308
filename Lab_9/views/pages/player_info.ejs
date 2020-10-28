@@ -18,11 +18,11 @@
 							 <!-- TODO: Populate our select with player options
 							 			For each player, set a new option with a value matching the palyer's id, 
 										 but will display the player's name-->
-							<% if(player){ %>			
-							<% var selected = ''%>
-							<% player.forEach(function(item){%>
-								selected += ' <option selected>'+item.name+'</option>';
-								<%}%>
+							 <%var selected = ''%>
+							<% if(data){ 			
+							data.forEach(function(item){
+								selected += '<option selected>' + item.name + '</option>';
+								}) %>
 							<%- selected %>
 							<% }%>
 						</select>

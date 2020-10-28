@@ -44,8 +44,7 @@
 					<%}%>
 				</tr>		
 			<%}%>
-			<%document.getElementById("wins").cells = win;%>
-			<%document.getElementById("lost").cells = lost;%>
+		
 			
 	</table>
 	<br>
@@ -56,12 +55,12 @@
 		</tr>
 		<tr>
 			<td id="wins">
-				
+				<%- win%>
 				<!-- TODO: Display the total number of wins here.  
 							    This value should come from your server.js files query, don't calculate it in this file! -->
 			</td>
 			<td id="lost">
-				
+				<%- lost%>
 				<!-- TODO: Display the total number of losses here.  
 							    This value should come from your server.js files query, don't calculate it in this file! -->
 			</td>
