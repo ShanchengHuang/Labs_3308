@@ -227,7 +227,7 @@ app.get('/home/team_stats', function (req, res) {
 });
 
 app.get('/home/player_info', function (req, res) {
-	var player = 'SELECT * FROM football_players;';
+	var player = 'SELECT id as id, name as name FROM football_players;';
 	
 	db.any(player)
 		.then(function (rows) {
