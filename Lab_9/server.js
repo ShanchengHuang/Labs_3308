@@ -279,16 +279,17 @@ app.post('/player_info/post', function (req, res) {
 		.then(data => {
 			res.render('pages/player_info/post', {
 				my_title: "Page Title Here",
-				player = data[0],
-				year = data[1],
-				major = data[2],
-				passing = data[3],
-				rushing = data[4],
-				receiving = data[5],
-				game_num = data[6],
-				passing_avg =data[7],
-				rushing_avg = data[8],
-				receiving_avg = data[9]
+				player : data[0],
+				year : data[1],
+				major : data[2],
+				passing : data[3],
+				rushing : data[4],
+				receiving : data[5],
+				game_num : data[6],
+				passing_avg :data[7],
+				rushing_avg : data[8],
+				receiving_avg :data[9],
+				select : data[10]
 			})
 		})
 		.catch(err => {
@@ -296,16 +297,16 @@ app.post('/player_info/post', function (req, res) {
 			console.log('error', err);
 			res.render('pages/player_info/post', {
 				my_title: "Page Title Here",
-				player = '',
-				year = '',
-				major = '',
-				passing = '',
-				rushing = '',
-				receiving = '',
-				game_num = 'data[6]',
-				passing_avg = '',
-				rushing_avg = '',
-				receiving_avg = ''
+				player: '',
+				year : '',
+				major :'',
+				passing : '',
+				rushing : '',
+				receiving : '',
+				game_num : 'data[6]',
+				passing_avg : '',
+				rushing_avg : '',
+				receiving_avg : ''
 			})
 		});
 });

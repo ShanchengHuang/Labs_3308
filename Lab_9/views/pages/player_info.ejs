@@ -9,9 +9,7 @@
 				  <% 
 				  var image_src = '../resources/img/helmet.jpg';
 				  %>
-				  <%if(select){
-					  image_src = '../resources/img/player'+ select +'.jpg'
-				  }%>
+				 
 				 <img class="card-img-top" id="player_img" src= "<%- image_src %>" alt="Image of Football Player">
 				  <div class="card-body mx-auto">
 					<form class="form"action="/player_info/post" method="get">
