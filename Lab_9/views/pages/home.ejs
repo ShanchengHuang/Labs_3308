@@ -22,7 +22,8 @@
 				<hr>
 				<!-- TODO: First EJS Update -->
 				<p> Color Message:
-					<% if(color){ %>
+					<% if(color)
+					{%>
 					<%- color_msg %>
 					<% var script_text = '<script>document.body.style.backgroundColor = "#' + color + '";</script>'; %>
 					<%- script_text %>
@@ -55,7 +56,7 @@
 				</form>
 
 				<form action="/home/pick_color" method="get">
-					<%if (data) { %>
+					<%if (data) {
 					    var buttons = '';
 						data.forEach(function(item){
 					  		 buttons += '<button type="submit" name="color_selection" class="btn btn-block" style="background-color:#' + item.hex_value + '" value="' + item.hex_value + '">';
