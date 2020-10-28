@@ -180,40 +180,32 @@ app.post('/home/pick_color', function (req, res) {
 		});
 });
 
-app.post('/home/team_stats', function (req, res) {
-	var games = 'select * from football_games;';
-	var game_date = req.games.game_date;
-	var game_name = req.games.game_name;
-	var game_home_score = req.games.game_home_score;
-	var game_visitor_score = req.games.game_visitor_score;
-	db.task('get-everything', task => {
-		return task.batch([
-			task.any(game_date),
-			task.any(game_name),
-		]);
-	})
-		.then(data => {
-			res.render('/home/team_stats', {
+app.get('/home/team_stats', function (req, res) {
+	var games = 'SELECT * FROM football_games;';
+	db.any(games)
+		.then(function (rows) {
+			res.render('pages/team_stats', {
 				my_title: "Team Stats",
-				date: data[0],
-				name: data[1],
-				home_score: data[3],
-				visitor_score: data[4],
-				home_score: data[4],
-				visitor_score: data[4]
+				name: rows,
+				home_score: '',
+				visitor_score: '',
+				date: '',
+				player: ''
 			})
+
 		})
-		.catch(err => {
+		.catch(function (err) {
 			// display error message in case an error
 			console.log('error', err);
-			res.render('/home/team_stats', {
+			res.render('pages/team_stats', {
 				my_title: "Team Stats",
-				game_date: '',
-				game_name: '',
-				game_home_score: '',
-				game_visitor_score: ''
+				name: '',
+				home_score: '',
+				visitor_score: '',
+				date: '',
+				player: ''
 			})
-		});
+		})
 
 }
 

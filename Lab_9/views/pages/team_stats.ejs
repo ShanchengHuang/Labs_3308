@@ -26,6 +26,26 @@
 						that ran onload for Lab 5.  We are doing the same kind of operations we had in Lab 5, but we are instead having
 						everything handled via server-side scriptes
 			-->
+			<%
+			if (name) {
+				var table = '';
+				var win = 0;
+				var lost = 0;
+				data.forEach(function(item){
+					   table += '<tr><td>'+ item.date +'</td><td>'+ item.name +'</td><td>'+ item.home_score +'</td><td>'+ item.visitor_score +'</td>';
+						 if(item.home_score > item.visitor_score){
+							table += '<td> CU BOULDR </td> </tr>'; //Boulder win
+							win += 1;
+						 }
+						 else{
+							table += '<td> '+ item.name +' </td> </tr>';
+							lost += 1;
+						 }
+				   }); %>
+				   <% document.getElementById("wins").cells = win; %>
+				   <% document.getElementById("lost").cells = lost; %>
+				   <%- table %>
+			<% } %>		
 
 	</table>
 	<br>
