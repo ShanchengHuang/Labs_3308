@@ -182,6 +182,24 @@ app.post('/home/pick_color', function (req, res) {
 
 app.get('/home/team_stats', function (req, res) {
 	var games = 'SELECT * FROM football_games;';
+	var name = 'SELECT visitor_name FROM football_games WHERE';
+	var home_score = 'SELECT home_score FROM football_games;';
+	var visitor_score = 'SELECT visitor_score FROM ;';
+	var date = 'SELECT game_date FROM football_games;';
+	var lost = 'SELECT COUNT(*) FROM football_games WHERE home_score < visitor_score;';
+	var win = 'SELECT COUNT(*) FROM football_games WHERE home_score > visitor_score;';
+	
+	db.task('get-everything', task => {
+		return task.batch([
+			task.any(name),
+			task.any(home_score),
+			task.any(visitor_score),
+			task.any(date),
+			task.any(lost),
+			task.any(win)
+		]);
+	})
+		
 	db.any(games)
 		.then(function (rows) {
 			res.render('pages/team_stats', {

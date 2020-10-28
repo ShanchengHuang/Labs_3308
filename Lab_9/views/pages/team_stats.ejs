@@ -27,7 +27,7 @@
 						everything handled via server-side scriptes
 			-->
 			<%
-			if (name) {
+			if (games) {
 				var table = '';
 				var win = 0;
 				var lost = 0;
@@ -35,15 +35,12 @@
 					   table += '<tr><td>'+ item.date +'</td><td>'+ item.name +'</td><td>'+ item.home_score +'</td><td>'+ item.visitor_score +'</td>';
 						 if(item.home_score > item.visitor_score){
 							table += '<td> CU BOULDR </td> </tr>'; //Boulder win
-							win += 1;
 						 }
 						 else{
-							table += '<td> '+ item.name +' </td> </tr>';
-							lost += 1;
+							table += '<td> '+ item.name +' </td> </tr>';					
 						 }
 				   }); %>
-				   <% document.getElementById("wins").cells = win; %>
-				   <% document.getElementById("lost").cells = lost; %>
+				  
 				   <%- table %>
 			<% } %>		
 
@@ -56,10 +53,14 @@
 		</tr>
 		<tr>
 			<td id="wins">
+				<%var win = win %>
+				<%-win>
 				<!-- TODO: Display the total number of wins here.  
 							    This value should come from your server.js files query, don't calculate it in this file! -->
 			</td>
 			<td id="lost">
+				<%var lost = lost %>
+				<%- lost%>
 				<!-- TODO: Display the total number of losses here.  
 							    This value should come from your server.js files query, don't calculate it in this file! -->
 			</td>
