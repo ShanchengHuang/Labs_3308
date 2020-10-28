@@ -8,8 +8,10 @@
 				<!-- TODO: Modify the ejs code below, to conditionally set the image_src to be from our chosen player -->
 				  <% 
 				  var image_src = '../resources/img/helmet.jpg';
-				  
 				  %>
+				  <%if(select){
+					  image_src = '../resources/img/player'+ select +'.jpg'
+				  }%>
 				 <img class="card-img-top" id="player_img" src= "<%- image_src %>" alt="Image of Football Player">
 				  <div class="card-body mx-auto">
 					<form class="form"action="/player_info/post" method="get">
@@ -21,7 +23,7 @@
 							 <%var selected = ''%>
 							<% if(data){ 			
 							data.forEach(function(item){
-								selected += '<option selected>' + item.name + '</option>';
+								selected += '<option selected value = "'+item.id +'">' + item.name + '</option>';
 								}) %>
 							<%- selected %>
 							<% }%>
@@ -33,32 +35,33 @@
 			<div class="col-8">
 				<div class="table-responsive">
 					<table class="table">
+						
 						<tr>
 							<!-- TODO: Set Player Information
 							 			If a player has been selected, fill in their information in each of the fields below.
 							 		    You'll need to calculate here the player's average rushing, receiving, and passing yards.-->
 							<th>Year</th>
-							<td>	</td>
+							<td><%- year%></td>
 						</tr>
 						<tr>
 							<th>Major</th>
-							<td>	</td>
+							<td><- major>	</td>
 						</tr>
 						<tr>
 							<th>Games Played</th>
-							<td>	</td>
+							<td><%- game_num%></td>
 						</tr>
 						<tr>
-							<td>Passing Yards: </td>
-							<td>Avg. Passing Yards: </td>
+							<td>Passing Yards: <%- passing%></td>
+							<td>Avg. Passing Yards: <%- passing_avg%></td>
 						</tr>
 						<tr>
-							<td>Rushing Yards: </td>
-							<td>Avg. Rushing Yards: </td>
+							<td>Rushing Yards: <%- rushing%></td>
+							<td>Avg. Rushing Yards: <%- rushing%></td>
 						</tr>
 						<tr>
-							<td>Receiving Yards: </td>
-							<td>Avg. Receiving Yards: </td>
+							<td>Receiving Yards: <%- receiving%></td>
+							<td>Avg. Receiving Yards:<%- receiving_avg%> </td>
 						</tr>
 					</table>
 				</div>

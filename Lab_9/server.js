@@ -153,7 +153,7 @@ app.post('/home/pick_color', function (req, res) {
 	var color_name = req.body.color_name;
 	var color_message = req.body.color_message;
 	var insert_statement = "INSERT into favorite_colors (hex_value, name, color_msg) VALUES ('" + color_hex + "', '" + color_name + "', '" + color_msg + "');";// Write a SQL statement to insert a color into the favorite_colors table
-	var color_select = "select * from favorite_cSSSolors;";// Write a SQL statement to retrieve all of the colors in the favorite_colors table
+	var color_select = "select * from favorite_colors;";// Write a SQL statement to retrieve all of the colors in the favorite_colors table
 
 	db.task('get-everything', task => {
 		return task.batch([
@@ -188,7 +188,7 @@ app.get('/team_stats', function (req, res) {
 	var date = 'SELECT game_date as date FROM football_games;';
 	var lost = 'SELECT COUNT(*) FROM football_games WHERE home_score < visitor_score;';
 	var win = 'SELECT COUNT(*) FROM football_games WHERE home_score > visitor_score;';
-	
+
 	db.task('get-everything', task => {
 		return task.batch([
 			task.any(name),
@@ -199,18 +199,18 @@ app.get('/team_stats', function (req, res) {
 			task.any(win)
 		]);
 	})
-		
-	.then(data => {
-		res.render('pages/team_stats',{
+
+		.then(data => {
+			res.render('pages/team_stats', {
 				my_title: "Team Stats",
 				name: data[0],
 				home_score: data[1],
 				visitor_score: data[2],
-				date: data[3], 
+				date: data[3],
 				lost: data[4],
 				win: data[5]
 			})
-	})
+		})
 		.catch(function (err) {
 			// display error message in case an error
 			console.log('error', err);
@@ -228,25 +228,86 @@ app.get('/team_stats', function (req, res) {
 
 app.get('/player_info', function (req, res) {
 	var player = 'SELECT id as id, name as name FROM football_players;';
-	
+
 	db.any(player)
 		.then(function (rows) {
-			res.render('pages/player_info',{
+			res.render('pages/player_info', {
 				my_title: "Player Info",
 				data: rows,
-				id:'',
-				name:''
+				id: '',
+				name: ''
 			})
-	
+
 		})
 		.catch(function (err) {
 			// display error message in case an error
 			console.log('error', err);
-			res.render('pages/player_info',{
+			res.render('pages/player_info', {
 				my_title: "Player Info",
 				data: ''
 			})
 		})
+});
+
+app.post('/player_info/post', function (req, res) {
+	var select = req.query.player_choice;
+	var player = 'SELECT id as id, name as name FROM football_players;';
+	var year = 'select year as year from table_name_2 WHERE id = '+ select +';';
+	var major = 'select major as major from table_name_2 WHERE id = '+ select +';';
+	var passing = 'select passing_yards as passing from table_name_2 WHERE id = '+ select +';';
+	var rushing = 'select rushing_yards as rushing from table_name_2 WHERE id = '+ select +';';
+	var receiving = 'select receiving_yards as receiving from table_name_2 WHERE id = '+ select +';';
+	var game_num = 'select COUNT(football_players.id) from football_players inner Join football_games.id = football_players.id WHERE football_players.id = '+ select +';';
+	var passing_avg = passing / game_num;
+	var rushing_avg = rushing / game_num;
+	var receiving_avg = receiving / game_num;
+	db.task('get-everything', task => {
+		return task.batch([
+			task.any(select),
+			task.any(player),
+			task.any(year),
+			task.any(major),
+			task.any(passing),
+			task.any(rushing),
+			task.any(receiving),
+			task.any(game_num),
+			task.any(passing_avg),
+			task.any(rushing_avg),
+			task.any(receiving_avg)
+		]);
+	})
+		.then(data => {
+			res.render('pages/player_info/post', {
+				my_title: "Page Title Here",
+				player = data[0],
+				year = data[1],
+				major = data[2],
+				passing = data[3],
+				rushing = data[4],
+				receiving = data[5],
+				game_num = data[6],
+				passing_avg =data[7],
+				rushing_avg = data[8],
+				receiving_avg = data[9]
+			})
+		})
+		.catch(err => {
+			// display error message in case an error
+			console.log('error', err);
+			res.render('pages/player_info/post', {
+				my_title: "Page Title Here",
+				player = '',
+				year = '',
+				major = '',
+				passing = '',
+				rushing = '',
+				receiving = '',
+				game_num = 'data[6]',
+				passing_avg = '',
+				rushing_avg = '',
+				receiving_avg = ''
+			})
+		});
 });
 
 

@@ -61,10 +61,10 @@
 						data.forEach(function(item){
 					  		 buttons += '<button type="submit" name="color_selection" class="btn btn-block" style="background-color:#' + item.hex_value + '" value="' + item.hex_value + '">';
 								 if(item.name){
-							       buttons += item.name + '</button>';
+							    	buttons += item.name + '</button>';
 							     }
 							     else{
-							    	 buttons += item.hex_value + '</button>';
+							    	buttons += item.hex_value + '</button>';
 							     }
 					  	 }); %>
 					  	 <%- buttons %>
