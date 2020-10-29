@@ -16,10 +16,23 @@ function getFarenheitTemp(temp) {
   return (9 * temp / 5) + 32;
 }
 
-//run when the document object model is ready for javascript code to execute
-$(document).ready(function () {
-  var url = 'https://api.weatherstack.com/forecast?access_key=5bc82451636190abd9d7afe6fe9b20b5&query=40.0150,-105.2705&forecast_days=5'; //Place your weatherstack API Call Here - access_key to be used: 5bc82451636190abd9d7afe6fe9b20b5
 
+//var lat = document.getElementById('Lat').value;
+//var lon = document.getElementById('Lon').value;
+//function chageLoc() {
+//  console.log("lon");
+//  location.reload();
+//}
+//    if (lat != '' && lon != '') {
+//      url = 'https://api.weatherstack.com/forecast?access_key=5bc82451636190abd9d7afe6fe9b20b5&query=' + lat + ',' + lon + '&forecast_days=5'
+//      //location.reload();
+//    } else {
+//    }
+//    //run when the document object model is ready for javascript code to execute
+$(document).ready(function () {
+
+  var url;
+  url = 'https://api.weatherstack.com/forecast?access_key=5bc82451636190abd9d7afe6fe9b20b5&query=40.0150,-105.2705&forecast_days=5'; //Place your weatherstack API Call Here - access_key to be used: 5bc82451636190abd9d7afe6fe9b20b5
   $.ajax({ url: url, dataType: "jsonp" }).then(function (data) {
     console.log(data);//Review all of the data returned
     //console.log("Current Temp: " + data.current.temperature);//View Today's Temp
@@ -37,10 +50,10 @@ $(document).ready(function () {
 
     if (F_Temp > 85) {
       document.getElementById('thermometer_inner').style.background = "red";
-    }else{
+    } else {
       document.getElementById('thermometer_inner').style.background = "blue";
-    }    
-    
+    }
+
     /*
       Read the current weather information from the data point values [https://weatherstack.com/documentation] to
       update the webpage for today's weather:
@@ -110,8 +123,8 @@ $(document).ready(function () {
       var f_l = getKey(i).mintemp;
       var Temp_h = getFarenheitTemp(f_h);
       var Temp_l = getFarenheitTemp(f_l);
-      var Sunrise = getKey(i).sunrise;
-      var Sunset = getKey(i).sunset;
+      var Sunrise = getKey(i).astro.sunrise;
+      var Sunset = getKey(i).astro.sunset;
       var card = $('<div style="width: 20%;"><div class="card"><div class="card-body"><h5 class="card-title">' + day + '</h5> <p class="card-text">High:' + Temp_h + '°F<br>Low:' + Temp_l + '°F<br>Sunrise:' + Sunrise + '<br>Sunset:' + Sunset + '</p></div></div></div>');
       card.appendTo('#5_day_forecast');
     }
