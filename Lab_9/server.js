@@ -249,7 +249,7 @@ app.get('/player_info', function (req, res) {
 		})
 });
 
-app.post('/player_info/post', function (req, res) {
+app.get('/player_info/post', function (req, res) {
 	var select = req.query.player_choice;
 	var player = 'SELECT id as id, name as name FROM football_players;';
 	var year = 'select year as year from table_name_2 WHERE id = '+ select +';';
@@ -261,6 +261,8 @@ app.post('/player_info/post', function (req, res) {
 	var passing_avg = passing / game_num;
 	var rushing_avg = rushing / game_num;
 	var receiving_avg = receiving / game_num;
+	var image_src = "selcet img_src as img from football_players WHERE id = "+ select +";";
+	//app.local.check = 1;
 	db.task('get-everything', task => {
 		return task.batch([
 			task.any(select),
@@ -273,23 +275,26 @@ app.post('/player_info/post', function (req, res) {
 			task.any(game_num),
 			task.any(passing_avg),
 			task.any(rushing_avg),
-			task.any(receiving_avg)
+			task.any(receiving_avg),
+			task.any(image_src)
 		]);
 	})
 		.then(data => {
 			res.render('pages/player_info/post', {
 				my_title: "Page Title Here",
-				player : data[0],
-				year : data[1],
-				major : data[2],
-				passing : data[3],
-				rushing : data[4],
-				receiving : data[5],
-				game_num : data[6],
-				passing_avg :data[7],
-				rushing_avg : data[8],
-				receiving_avg :data[9],
-				select : data[10]
+				select : data[0],
+				player : data[1],
+				year : data[2],
+				major : data[3],
+				passing : data[4],
+				rushing : data[5],
+				receiving : data[6],
+				game_num : data[7],
+				passing_avg :data[8],
+				rushing_avg : data[9],
+				receiving_avg :data[10],
+				image_src:data[11]
+				
 			})
 		})
 		.catch(err => {
@@ -306,7 +311,8 @@ app.post('/player_info/post', function (req, res) {
 				game_num : 'data[6]',
 				passing_avg : '',
 				rushing_avg : '',
-				receiving_avg : ''
+				receiving_avg : '',
+				image_src: ''
 			})
 		});
 });
