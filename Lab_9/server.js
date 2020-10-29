@@ -249,9 +249,9 @@ app.get('/player_info', function (req, res) {
 		})
 });
 
-app.post('/player_info/post', function (req, res) {
+app.get('/player_info/post', function (req, res) {
 	var select = req.query.player_choice;
-	var player = 'SELECT id as id, name as name FROM football_players;';
+	var player_id = 'SELECT id FROM football_players;';
 	var year = 'select year as year from table_name_2 WHERE id = '+ select +';';
 	var major = 'select major as major from table_name_2 WHERE id = '+ select +';';
 	var passing = 'select passing_yards as passing from table_name_2 WHERE id = '+ select +';';
@@ -261,6 +261,9 @@ app.post('/player_info/post', function (req, res) {
 	var passing_avg = passing / game_num;
 	var rushing_avg = rushing / game_num;
 	var receiving_avg = receiving / game_num;
+	var img = "selcet img_src as img from football_players WHERE id = "+ select +";";
+	app.local.check = 1;
+	app.loacl.id = select;
 	db.task('get-everything', task => {
 		return task.batch([
 			task.any(select),
@@ -273,6 +276,7 @@ app.post('/player_info/post', function (req, res) {
 			task.any(game_num),
 			task.any(passing_avg),
 			task.any(rushing_avg),
+			task.any(receiving_avg)
 			task.any(receiving_avg)
 		]);
 	})
