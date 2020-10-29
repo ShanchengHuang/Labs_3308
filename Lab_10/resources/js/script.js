@@ -1,24 +1,46 @@
 //helper functions
 var dayOfWeek = "";
-function formatDate(date, month, year)
-{
+function formatDate(date, month, year) {
   month = (month.length < 2) ? ('0' + month) : month;
-  date = (date.length < 2)? ('0' + date) : date;
-  return [year,month,date].join('-');
+  date = (date.length < 2) ? ('0' + date) : date;
+  return [year, month, date].join('-');
 }
-function getDayofWeek(date, month, year){
+
+function getDayofWeek(date, month, year) {
   var week_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  dayOfWeek =  week_names[new Date([month,date,year].join('-')).getDay()];
+  dayOfWeek = week_names[new Date([month, date, year].join('-')).getDay()];
+  return dayOfWeek;
 }
-function getFarenheitTemp(temp){
-  return (9*temp/5)+32;
+
+function getFarenheitTemp(temp) {
+  return (9 * temp / 5) + 32;
 }
 
 //run when the document object model is ready for javascript code to execute
-$(document).ready(function() {
-  var url =''; //Place your weatherstack API Call Here - access_key to be used: 5bc82451636190abd9d7afe6fe9b20b5
+$(document).ready(function () {
+  var url = 'https://api.weatherstack.com/forecast?access_key=5bc82451636190abd9d7afe6fe9b20b5&query=40.0150,-105.2705&forecast_days=5'; //Place your weatherstack API Call Here - access_key to be used: 5bc82451636190abd9d7afe6fe9b20b5
 
-  $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+  $.ajax({ url: url, dataType: "jsonp" }).then(function (data) {
+    console.log(data);//Review all of the data returned
+    //console.log("Current Temp: " + data.current.temperature);//View Today's Temp
+
+    var C_Temp = data.current.temperature;
+    var F_Temp = getFarenheitTemp(C_Temp);
+    document.getElementById('local_time').innerHTML = data.location.localtime;
+    document.getElementById('precip_today').innerHTML = data.current.precip + "%";
+    document.getElementById('humidity_today').innerHTML = data.current.humidity + "%";
+    document.getElementById('wind_today').innerHTML = data.current.wind_speed + "mph";
+    document.getElementById('summary_today').innerHTML = data.current.weather_descriptions;
+    document.getElementById('temp_today').innerHTML = F_Temp + "°F";
+    document.getElementById('thermometer_inner').style.height = "" + C_Temp * 2 + "%";
+    document.getElementById('heading').innerHTML = "Today's Weather Forecast - " + data.location.name;
+
+    if (F_Temp > 85) {
+      document.getElementById('thermometer_inner').style.background = "red";
+    }else{
+      document.getElementById('thermometer_inner').style.background = "blue";
+    }    
+    
     /*
       Read the current weather information from the data point values [https://weatherstack.com/documentation] to
       update the webpage for today's weather:
@@ -44,10 +66,10 @@ $(document).ready(function() {
 
     */
     //helper function - to be used to get the key for each of the 5 days in the future when creating cards for forecasting weather
-    function getKey(i){
-        var week_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'];
-        dayOfWeek=week_names[new Date(Object.keys(data.forecast)[i]).getDay()];
-        return data.forecast[Object.keys(data.forecast)[i]];
+    function getKey(i) {
+      var week_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      dayOfWeek = week_names[new Date(Object.keys(data.forecast)[i]).getDay()];
+      return data.forecast[Object.keys(data.forecast)[i]];
     }
     /* Process the daily forecast for the next 5 days */
 
@@ -77,5 +99,25 @@ $(document).ready(function() {
       <Hint2 - To add the cards to the HTML> - Make sure to use string concatenation to add the html code for the daily weather cards.  This should
       be set to the innerHTML for the 5_day_forecast.
     */
+
+    for (var i = 0; i < 5; i++) {
+      var date = getKey(i).date;
+      var yy = date[0] + date[1] + date[2] + date[3];
+      var mm = date[5] + date[6];
+      var dd = date[8] + date[9];
+      var day = getDayofWeek(dd, mm, yy);
+      var f_h = getKey(i).maxtemp;
+      var f_l = getKey(i).mintemp;
+      var Temp_h = getFarenheitTemp(f_h);
+      var Temp_l = getFarenheitTemp(f_l);
+      var Sunrise = getKey(i).sunrise;
+      var Sunset = getKey(i).sunset;
+      var card = $('<div style="width: 20%;"><div class="card"><div class="card-body"><h5 class="card-title">' + day + '</h5> <p class="card-text">High:' + Temp_h + '°F<br>Low:' + Temp_l + '°F<br>Sunrise:' + Sunrise + '<br>Sunset:' + Sunset + '</p></div></div></div>');
+      card.appendTo('#5_day_forecast');
+    }
+
+    //console.log(m);
+
+
   })
 });
