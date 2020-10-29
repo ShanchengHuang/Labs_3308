@@ -262,7 +262,7 @@ app.get('/player_info/post', function (req, res) {
 	var rushing_avg = rushing / game_num;
 	var receiving_avg = receiving / game_num;
 	var image_src = "selcet img_src as img from football_players WHERE id = "+ select +";";
-	//app.local.check = 1;
+	app.locals.check = 1;
 	db.task('get-everything', task => {
 		return task.batch([
 			task.any(select),
