@@ -95,28 +95,25 @@
                 </div>
 
                 <!-- For the photo -->
-                <div class="container" id="photoContainer">
-                    
+                <div class="container" id="photoCon">
+
                 </div>
 
             </div>
         </div>
     </div>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+                // alert("near bottom!");
+                makeApiCall();
+            }
+        });
+    </script>
     <br>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <br>
     <br>
     <br>
