@@ -1,5 +1,6 @@
 //helper functions
 var dayOfWeek = "";
+
 function formatDate(date, month, year) {
   month = (month.length < 2) ? ('0' + month) : month;
   date = (date.length < 2) ? ('0' + date) : date;
@@ -33,8 +34,11 @@ $(document).ready(function () {
 
   var url;
   url = 'https://api.weatherstack.com/forecast?access_key=5bc82451636190abd9d7afe6fe9b20b5&query=40.0150,-105.2705&forecast_days=5'; //Place your weatherstack API Call Here - access_key to be used: 5bc82451636190abd9d7afe6fe9b20b5
-  $.ajax({ url: url, dataType: "jsonp" }).then(function (data) {
-    console.log(data);//Review all of the data returned
+  $.ajax({
+    url: url,
+    dataType: "jsonp"
+  }).then(function (data) {
+    console.log(data); //Review all of the data returned
     //console.log("Current Temp: " + data.current.temperature);//View Today's Temp
 
     var C_Temp = data.current.temperature;
