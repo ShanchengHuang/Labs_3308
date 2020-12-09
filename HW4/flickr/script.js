@@ -108,9 +108,6 @@ function makeApiCall() {
             i += 2;
         }
 
-
     })
-
-
 
 }
