@@ -38,5 +38,16 @@ var db = pgp(dbConfig);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
+app.get('/homePage', function(req, res) {
+	res.render('pages/main',{
+		title:'Home Page'
+	});
+});
+
+app.get('/reviews', function(req, res) {
+	res.render('pages/reviews',{
+		title:'Reviews Page'
+	});
+});
 
 app.listen(3000);
