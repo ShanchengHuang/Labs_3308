@@ -45,6 +45,7 @@
             </div>
         </div>
     </nav>
+
     <div id="h_re">
         <div class="container" id="TheMainBody">
 
@@ -52,7 +53,8 @@
     </div>
 
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="modalChange('asd')">Open Modal</button>
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
+        onclick="modalChange('test')"> Add Review </button> -->
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -66,27 +68,28 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                          <label for="books-name" class="col-form-label">For Books:</label>
-                          <input type="text" class="form-control" id="books-name" >
+                            <label for="books-name" class="col-form-label">For Books:</label>
+                            <input type="text" class="form-control" id="books-name" name="books-name" disabled>
                         </div>
                         <div class="form-group">
-                          <label for="Reviews-text" class="col-form-label">Your Reviews:</label>
-                          <textarea class="form-control" id="Reviews-text"></textarea>
+                            <label for="Reviews-text" class="col-form-label">Your Reviews:</label>
+                            <textarea class="form-control" id="reviews-text" name="reviews-text"></textarea>
                         </div>
-                      </form>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Send message</button>
-                      </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
-   
+    
+
 
 </body>
 

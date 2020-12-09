@@ -43,10 +43,13 @@ function makeApiCall() {
             var b_name4 = data.work[num].titleweb;
             var b_index4 = num;
             num++;
+            var dot = "'";
 
+            console.log(dot);
 
+{/* <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+b_name1+')"> Add Review </button> */}
 
-            var card = $('<div class="container-sm row"> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index1 + '"> ' + b_name1 + ' </h5> <p class = "card-text"> ' + a_name1 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index2 + '"> ' + b_name2 + ' </h5> <p class = "card-text"> ' + a_name2 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index3 + '"> ' + b_name3 + ' </h5> <p class = "card-text"> ' + a_name3 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index4 + '"> ' + b_name4 + ' </h5> <p class = "card-text"> ' + a_name4 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div> </div>');
+            var card = $('<div class="container-sm row"> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index1 + '"> ' + b_name1 + ' </h5> <p class = "card-text"> ' + a_name1 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> </div> </div> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index2 + '"> ' + b_name2 + ' </h5> <p class = "card-text"> ' + a_name2 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index3 + '"> ' + b_name3 + ' </h5> <p class = "card-text"> ' + a_name3 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index4 + '"> ' + b_name4 + ' </h5> <p class = "card-text"> ' + a_name4 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div> </div>');
             card.appendTo('#TheMainBody');
         }
 
@@ -54,15 +57,5 @@ function makeApiCall() {
 };
 
 function modalChange(book_name) {
-    document.getElementById("books-name").value() = book_name;
-
+    document.getElementById("books-name").value = book_name;
 };
-
-$('#myModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-body input').val(recipient)
-})
