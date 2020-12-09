@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.get('/homePage', function(req, res) {
+app.get('/main', function(req, res) {
 	res.render('pages/main',{
 		title:'Home Page'
 	});
