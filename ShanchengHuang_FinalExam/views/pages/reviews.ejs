@@ -14,6 +14,7 @@
                 <th scope="col">Review Date</th>
             </tr>
         </thead>
+        <%var selected = ''%>
         <% if(data){ 			
             data.forEach(function(item){
                 selected += '<tbody> <tr> <th scope="row">'+item.id+'</th>' + '<td>'+item.book+'</td>' + '<td>'+item.review+'</td>' + '<td>'+item.date+'</td>';
