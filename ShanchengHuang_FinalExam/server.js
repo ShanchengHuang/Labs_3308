@@ -53,13 +53,13 @@ app.post('/main/post', function (req, res) {
     var date = new Date();
     var d = date.getDate();
      	
-    var addone = "INSERT INTO table_review (id,book_title,review,review_data) VALUES ("+newid+",'"+ book +"','"+ review +"','2020-12-"+d+");"
+    var addone = "INSERT INTO table_review (id,book_title,review,review_data) VALUES (((SELECT id FROM table_review ORDER BY id DESC LIMIT 1) + 1),'"+ book +"','"+ review +"','2020-12-"+d+"');"
 console.log(addone);
 db.task('get-everything', task => {
         return task.batch([
-              task.any(newid),
+              //task.any(newid),
                 task.any(addone),
-                res.redirect('/reviews')
+                res.redirect('/main')
         ]);
     })
 
