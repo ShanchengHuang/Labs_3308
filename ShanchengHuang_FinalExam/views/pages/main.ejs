@@ -70,8 +70,13 @@
 
     function modalChange(book_name) {
         document.getElementById("books-name").value = book_name;
-        // document.getElementById("review_form").submit();
+       
     };
+    
+    function sub() {
+        document.getElementById("review_form").submit();
+    };
+    
 </script>
 
 
@@ -98,21 +103,23 @@
                     <h4 class="modal-title text-center ">Write Reviews</h4>
                 </div>
                 <div class="modal-body" id="review_form">
+                <form action="/main/post" method="POST">
                     <form>
-                        <div class="form-group">
+                        <div class="form >
                             <label for="books-name" class="col-form-label">For Books:</label>
-                            <input type="text" class="form-control" id="books-name" name="books-name" disabled>
-                        </div>
-                        <div class="form-group">
+                            <input type="text" class="form-control" id="books-name" name="booksname" >                     
                             <label for="Reviews-text" class="col-form-label">Your Reviews:</label>
-                            <textarea class="form-control" id="reviews-text" name="reviews-text"></textarea>
+                            <textarea class="form-control" id="reviews-text" name="reviewstext"></textarea>
+                            <input type="submit" value="Submit">
                         </div>
-                    </form>
+                        </form>
+                        <form action="/main/post" method="POST">
+                    
                 </div>
-                <div class="modal-footer">
+                
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">SAVE</button>
+                        
                     </div>
                 </div>
             </div>

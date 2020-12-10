@@ -23,6 +23,7 @@ const dbConfig = {
 
 var db = pgp(dbConfig);
 
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));
@@ -43,25 +44,25 @@ app.get('/main', function (req, res) {
     });
 });
 
-app.get('/main/post', function (req, res) {
+app.post('/main/post', function (req, res) {
+ 
 
-
-    var book = req.body.emailName;
-    var review = req.body.passwordName;
-    var date = Date();
-        var addone = "INSERT INTO table_review (id,book_title,review,review_data) VALUES (((SELECT id FROM table_review ORDER BY id DESC LIMIT 1) + 1), '"+ book +"', '"+ review +"', '"+date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDATE()+"');"
-
-    db.task('get-everything', task => {
-            return task.batch([
+    var book = req.body.booksname;
+    var review = req.body.reviewstext;
+    var newid = "SELECT COUNT(*) FROM table_review;"
+    var date = new Date();
+    var d = date.getDate();
+     	
+    var addone = "INSERT INTO table_review (id,book_title,review,review_data) VALUES ("+newid+",'"+ book +"','"+ review +"','2020-12-"+d+");"
+console.log(addone);
+db.task('get-everything', task => {
+        return task.batch([
+              task.any(newid),
                 task.any(addone),
-            ]);
-        })
-        .then(data => {
+                res.redirect('/reviews')
+        ]);
+    })
 
-        })
-        .catch(err => {
-
-        });
 });
 
 
@@ -72,7 +73,7 @@ app.get('/reviews', function (req, res) {
     var book = "SELECT book_title AS book FROM table_review;";
     var review = "SELECT review AS review FROM table_review;";
     var date = "SELECT table_review.review_data AS date FROM table_review;";
-    var num = "SELECT id FROM table_review ORDER BY id DESC LIMIT 1;";
+    var num = "SELECT COUNT(*) AS num FROM table_review;";
 
     db.task('get-everything', task => {
             return task.batch([
@@ -90,7 +91,7 @@ app.get('/reviews', function (req, res) {
                 book: data[1],
                 review: data[2],
                 date: data[3],
-                num: date[4]
+                num: num
             })
         })
         .catch(err => {
