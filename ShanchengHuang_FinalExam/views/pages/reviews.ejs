@@ -14,21 +14,25 @@
                 <th scope="col">Review Date</th>
             </tr>
         </thead>
-        <%var selected = ''%>
-        <% if(data){ 			
-            data.forEach(function(item){
-                selected += '<tbody> <tr> <th scope="row">'+item.id+'</th>' + '<td>'+item.book+'</td>' + '<td>'+item.review+'</td>' + '<td>'+item.date+'</td>';
-            }) %>
-        <%- selected %>
-        <% }%>
-        // <tbody>
-        //     <tr>
-        //         <th scope="row">1</th>
-        //         <td>Mark</td>
-        //         <td>Otto</td>
-        //         <td>@mdo</td>
-        //     </tr>
-        // </tbody>
+        <% var max = num[0].num%>
+        <% for (var i = 0; i < max; i ++) {%>
+            <tbody>
+                <tr>
+                    <th scope="row"><%-id[i].id %> </th>
+                    <td><%- book[i].book %></td>
+                    <td><%- review[i].review %></td>
+                    <td><%- date[i].date %></td>
+                </tr>
+            </tbody>	
+        <%}%>
+            <!-- <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody> -->
     </table>
 </body>
 

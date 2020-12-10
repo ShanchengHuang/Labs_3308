@@ -72,6 +72,7 @@ app.get('/reviews', function (req, res) {
     var book = "SELECT book_title AS book FROM table_review;";
     var review = "SELECT review AS review FROM table_review;";
     var date = "SELECT table_review.review_data AS date FROM table_review;";
+    var num = "SELECT id FROM table_review ORDER BY id DESC LIMIT 1;";
 
     db.task('get-everything', task => {
             return task.batch([
@@ -79,6 +80,7 @@ app.get('/reviews', function (req, res) {
                 task.any(book),
                 task.any(review),
                 task.any(date),
+                task.any(num)
             ]);
         })
         .then(data => {
@@ -87,7 +89,8 @@ app.get('/reviews', function (req, res) {
                 id: data[0],
                 book: data[1],
                 review: data[2],
-                date: data[3]
+                date: data[3],
+                num: date[4]
             })
         })
         .catch(err => {
