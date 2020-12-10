@@ -1,9 +1,11 @@
 function makeApiCall() {
+    
 document.getElementById("TheMainBody").remove();
 var card = $(' <div class="container" id="TheMainBody"></div>');
 card.appendTo('#h_re');
+
 var work = document.getElementById("searchInput").value;
-// console.log(work);
+ console.log("work");
 if (work == "") {
     alert("NULL input");
     return;
@@ -38,7 +40,7 @@ $.ajax({
         var b_index4 = num;
         num++;
         var dot = "'";
-        console.log(dot);
+        //console.log(dot);
 {/* <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> */}
         var card = $('<div class="container-sm row"> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index1 + '"> ' + b_name1 + ' </h5> <p class = "card-text"> ' + a_name1 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> </div> </div> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index2 + '"> ' + b_name2 + ' </h5> <p class = "card-text"> ' + a_name2 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name2+ dot +')"> Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index3 + '"> ' + b_name3 + ' </h5> <p class = "card-text"> ' + a_name3 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name3+ dot +')"> Add Review  </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index4 + '"> ' + b_name4 + ' </h5> <p class = "card-text"> ' + a_name4 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name4+ dot +')"> Add Review  </button> </div> </div> </div>');
         card.appendTo('#TheMainBody');
