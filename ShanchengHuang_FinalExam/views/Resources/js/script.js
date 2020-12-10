@@ -1,15 +1,18 @@
 function makeApiCall() {
-    
+
 document.getElementById("TheMainBody").remove();
 var card = $(' <div class="container" id="TheMainBody"></div>');
 card.appendTo('#h_re');
 
 var work = document.getElementById("searchInput").value;
+
  console.log("work");
+
 if (work == "") {
     alert("NULL input");
     return;
 }
+
 var url = "https://reststop.randomhouse.com/resources/works/?start=0&max=12&expandLevel=1&search=" + work + "%22,%22work";
 $.ajax({
     url: url,
@@ -47,7 +50,11 @@ $.ajax({
     }
 })
 };
+
+
 function modalChange(book_name) {
 document.getElementById("books-name").value = book_name;
 // document.getElementById("review_form").submit();
 };
+
+// file:///C:/Users/jackh/Desktop/code/Labs_3308/ShanchengHuang_FinalExam/Views/pages/test.html?#
