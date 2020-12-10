@@ -54,7 +54,7 @@ $.ajax({
 
 function modalChange(book_name) {
 document.getElementById("books-name").value = book_name;
-// document.getElementById("review_form").submit();
+ document.getElementById("review_form").submit();
 };
 
 // file:///C:/Users/jackh/Desktop/code/Labs_3308/ShanchengHuang_FinalExam/Views/pages/test.html?#
