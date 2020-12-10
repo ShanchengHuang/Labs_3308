@@ -50,9 +50,9 @@
 
             console.log(dot);
 
-{/* <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+b_name1+')"> Add Review </button> */}
+{/* <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> */}
 
-            var card = $('<div class="container-sm row"> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index1 + '"> ' + b_name1 + ' </h5> <p class = "card-text"> ' + a_name1 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> </div> </div> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index2 + '"> ' + b_name2 + ' </h5> <p class = "card-text"> ' + a_name2 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index3 + '"> ' + b_name3 + ' </h5> <p class = "card-text"> ' + a_name3 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index4 + '"> ' + b_name4 + ' </h5> <p class = "card-text"> ' + a_name4 + '</p> <button class = "btn btn-primary" onclick = "" > Add Review </button> </div> </div> </div>');
+            var card = $('<div class="container-sm row"> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index1 + '"> ' + b_name1 + ' </h5> <p class = "card-text"> ' + a_name1 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name1+ dot +')"> Add Review </button> </div> </div> <div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index2 + '"> ' + b_name2 + ' </h5> <p class = "card-text"> ' + a_name2 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name2+ dot +')"> Add Review </button> Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index3 + '"> ' + b_name3 + ' </h5> <p class = "card-text"> ' + a_name3 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name3+ dot +')"> Add Review </button> Add Review </button> </div> </div><div class="card col"> <div class = "card-body" ><h5 class = "card-title" id = "books_' + b_index4 + '"> ' + b_name4 + ' </h5> <p class = "card-text"> ' + a_name4 + '</p> <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onclick="modalChange('+ dot + b_name4+ dot +')"> Add Review </button> Add Review </button> </div> </div> </div>');
             card.appendTo('#TheMainBody');
         }
 
@@ -61,6 +61,7 @@
 
 function modalChange(book_name) {
     document.getElementById("books-name").value = book_name;
+    document.getElementById("review_form").submit();
 };
 </script>
 
@@ -87,7 +88,7 @@ function modalChange(book_name) {
                     <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title text-center ">Write Reviews</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="review_form">
                     <form>
                         <div class="form-group">
                             <label for="books-name" class="col-form-label">For Books:</label>

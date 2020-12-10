@@ -5,6 +5,30 @@
 
 <body>
     <%- include('../partials/menu') %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Books Name</th>
+                <th scope="col">Your Review</th>
+                <th scope="col">Review Date</th>
+            </tr>
+        </thead>
+        <% if(data){ 			
+            data.forEach(function(item){
+                selected += '<tbody> <tr> <th scope="row">'+item.id+'</th>' + '<td>'+item.book+'</td>' + '<td>'+item.review+'</td>' + '<td>'+item.date+'</td>';
+            }) %>
+        <%- selected %>
+        <% }%>
+        // <tbody>
+        //     <tr>
+        //         <th scope="row">1</th>
+        //         <td>Mark</td>
+        //         <td>Otto</td>
+        //         <td>@mdo</td>
+        //     </tr>
+        // </tbody>
+    </table>
 </body>
 
 
