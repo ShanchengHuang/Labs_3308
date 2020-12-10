@@ -1,19 +1,14 @@
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
-
-const {
-    all
-} = require('async');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({
-    extended: true
-})); // support encoded bodies
+app.use(bodyParser.json());              // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //Create Database Connection
 var pgp = require('pg-promise')();
 
-const dbConfig = {
+
+let  dbConfig = {
     host: 'localhost',
     port: 5432,
     database: 'book_review',
@@ -21,7 +16,9 @@ const dbConfig = {
     password: 'overwatch'
 };
 
-var db = pgp(dbConfig);
+const isProduction = process.env.NODE_ENV === 'production';
+dbConfig = isProduction ? process.env.DATABASE_URL : dbConfig;
+let db = pgp(dbConfig);
 
 
 // set the view engine to ejs
@@ -102,4 +99,4 @@ app.get('/reviews', function (req, res) {
 
 
 app.listen(3000);
-console.log('3000 is the magic port');
+
